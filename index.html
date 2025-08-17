@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Robson Ladeira - Do Básico ao Avançado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #006414;
+            --primary: #009929;
+            --primary-light: #5ccb5f;
+            --dark: #121012;
+            --gray: #413e40;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 153, 41, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 100, 20, 0.9), rgba(0, 153, 41, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        /* Course Modules */
+        .modules-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .module {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .module-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .module-header h3 {
+            font-size: 18px;
+        }
+        
+        .module-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        
+        .module-content.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .module-content ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+        
+        .module-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background-color: var(--light);
+        }
+        
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .pricing-features {
+            margin: 30px 0;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 15px;
+            list-style: none;
+        }
+        
+        /* Testimonials */
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .datepicker-container {
+            position: relative;
+        }
+        
+        .datepicker-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        .floating-btn.whatsapp {
+            background-color: #25D366;
+        }
+        
+        .floating-btn.instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .mobile-links {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .mobile-links li {
+            margin-bottom: 30px;
+        }
+        
+        .mobile-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 24px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .mobile-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-top: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                min-height: 600px;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .floating-btns {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Robson<span>Ladeira</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Quem Somos</a></li>
+                    <li><a href="#pricing">Preços</a></li>
+                    <li><a href="#contact">Inscrever-se</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" id="closeMenuBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#about">Quem Somos</a></li>
+            <li><a href="#pricing">Preços</a></li>
+            <li><a href="#contact">Inscrever-se</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Domine o Excel do Básico ao Avançado</h1>
+            <p>Aprenda com um especialista com mais de 10 anos de experiência como transformar dados em insights poderosos e tomar decisões estratégicas com Excel.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn">Quero me Inscrever</a>
+                <a href="#pricing" class="btn btn-outline">Ver Planos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quem Somos</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Robson Ladeira - Especialista em Excel e BI</h3>
+                    <p>Com mais de 10 anos de experiência no mercado como Analista de BI, especializado em resolução de problemas, análise de KPIs e gestão de processos logísticos, decidi compartilhar todo meu conhecimento em um curso completo de Excel.</p>
+                    <p>Sou casado e pai de dois filhos, e entendo como é importante ter habilidades que fazem diferença no mercado de trabalho e na vida profissional.</p>
+                    <p>Neste curso, você vai sair do básico até o nível avançado, aprendendo na prática como resolver problemas reais com fórmulas, tabelas dinâmicas e dashboards interativos que vão impressionar seus colegas e superiores.</p>
+                    <a href="#contact" class="btn">Quero Aprender Agora</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://www.jplcomputer.co.uk/wp-content/uploads/2021/06/INTERMEDIATE-EXCEL-1024x1024.png" alt="Robson Ladeira">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>O Que Você Vai Aprender</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Fórmulas Avançadas</h3>
+                    <p>Domine as principais funções do Excel como PROCV, SOMASES, CONT.SES e muitas outras que vão automatizar seu trabalho.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h3>Tabelas Dinâmicas</h3>
+                    <p>Aprenda a criar e personalizar tabelas dinâmicas poderosas para analisar grandes volumes de dados de forma rápida e eficiente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Dashboards Interativos</h3>
+                    <p>Crie painéis de controle profissionais com gráficos dinâmicos que atualizam automaticamente e impressionam qualquer gestor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Modules -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Conteúdo do Curso</h2>
+            </div>
+            <div class="modules-container">
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Módulo 1: Fundamentos do Excel</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li>Interface e atalhos essenciais</li>
+                            <li>Formatação condicional básica</li>
+                            <li>Fórmulas básicas (SOMA, MÉDIA, CONTAR, etc.)</li>
+                            <li>Trabalhando com planilhas e pastas de trabalho</li>
+                            <li>Importação e exportação de dados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Módulo 2: Funções Intermediárias</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li>Funções de pesquisa (PROCV, PROCX, SOMASE )</li>
+                            <li>Funções lógicas (SE, E, OU)</li>
+                            <li>Funções de texto (CONCATENAR, DIREITA, ESQUERDA, etc.)</li>
+                            <li>Funções de data e hora</li>
+                            <li>Validação de dados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Módulo 3: Análise de Dados</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li>Tabelas dinâmicas avançadas</li>
+                            <li>Gráficos dinâmicos e personalização</li>
+                            <li>Segmentação de dados</li>
+                            <li>Análise de cenários</li>
+                            <li>Previsões e tendências</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Módulo 4: Dashboards Profissionais</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li>Princípios de design para dashboards</li>
+                            <li>Criação de painéis interativos</li>
+                            <li>Controles de formulário</li>
+                            <li>Automação com macros básicas</li>
+                            <li>Apresentando seus dados de forma impactante</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Módulo 5: Casos Práticos</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li>Análise de vendas e desempenho</li>
+                            <li>Controle de estoque e logística</li>
+                            <li>Relatórios financeiros</li>
+                            <li>Dashboard de RH e performance</li>
+                            <li>Projeto final integrado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Planos e Preços</h2>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Plano Antigo</h3>
+                    <div class="price">R$197<span>,00</span></div>
+                    <p>À vista no boleto ou pix</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Acesso a todos os módulos</li>
+                        <li><i class="fas fa-check"></i> Materiais de apoio</li>
+                        <li><i class="fas fa-check"></i> Certificado de conclusão</li>
+                        <li><i class="fas fa-times"></i> Suporte individual</li>
+                        <li><i class="fas fa-times"></i> Acesso à comunidade</li>
+                    </ul>
+                    
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-tag">Promoção</div>
+                    <h3>Completo</h3>
+                    <div class="price"> 
+                        <p>1x de<br>R$34<span>,90</span></p> </div>
+                    <p>Garanta já o seu!</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Acesso a todos os módulos</li>
+                        <li><i class="fas fa-check"></i> Materiais de apoio</li>
+                        <li><i class="fas fa-check"></i> Certificado de conclusão</li>
+                        <li><i class="fas fa-check"></i> Suporte individual</li>
+                        <li><i class="fas fa-check"></i> Acesso à comunidade</li>
+                    </ul>
+                    <a href="#contact" class="btn">Quero este</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>O Que Dizem Nossos Alunos</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">"O curso do Robson transformou completamente minha forma de trabalhar com Excel. Em apenas 2 meses consegui uma promoção no trabalho graças às habilidades que adquiri!"</p>
+                    <p class="testimonial-author">- Ana Carolina, Analista Financeira</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Finalmente encontrei um curso que ensina Excel de verdade, com casos práticos do dia a dia. As aulas são claras e o Robson tem uma didática incrível!"</p>
+                    <p class="testimonial-author">- Pedro Henrique, Gerente de Logística</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Depois de tentar aprender sozinho por anos, em 1 mês de curso já estava criando dashboards profissionais que impressionaram meu chefe. Recomendo muito!"</p>
+                    <p class="testimonial-author">- Juliana, Assistente Administrativa</p>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Perguntas Frequentes</h2>
+            </div>
+            <div class="modules-container">
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Posso acessar o curso pelo celular?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Sim! Nossa plataforma é totalmente responsiva e pode ser acessada de qualquer dispositivo, incluindo smartphones e tablets. No entanto, recomendamos que as práticas sejam feitas em um computador para melhor experiência.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Preciso de algum material?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Você só precisa de um computador com o Microsoft Excel instalado (versão 2010 ou superior). Todos os materiais de apoio, como planilhas de exercícios e templates, são disponibilizados dentro da plataforma do curso.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Quanto tempo vou levar para terminar?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>O curso foi projetado para ser concluído em aproximadamente 8 semanas com dedicação de 4-5 horas por semana. No entanto, você tem acesso vitalício e pode aprender no seu próprio ritmo.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <div class="module-header">
+                        <h3>Receberei suporte após a conclusão?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Sim! Além do suporte durante o curso, você terá acesso à nossa comunidade exclusiva onde pode continuar tirando dúvidas e trocando experiências com outros alunos mesmo após concluir os módulos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Inscreva-se Agora</h2>
+            </div>
+            <form class="contact-form" id="enrollmentForm">
+                <div class="form-group">
+                    <label for="fullName">Nome Completo</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="source">Como nos conheceu?</label>
+                    <select id="source" class="form-control" required>
+                        <option value="">Selecione...</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="indicacao">Indicação de amigo</option>
+                        <option value="google">Google/Busca</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+  <label for="state">Estado</label>
+  <select id="state" class="form-control" required>
+    <option value="">Selecione o estado</option>
+    <option value="AC">Acre</option>
+    <option value="AL">Alagoas</option>
+    <option value="AP">Amapá</option>
+    <option value="AM">Amazonas</option>
+    <option value="BA">Bahia</option>
+    <option value="CE">Ceará</option>
+    <option value="DF">Distrito Federal</option>
+    <option value="ES">Espírito Santo</option>
+    <option value="GO">Goiás</option>
+    <option value="MA">Maranhão</option>
+    <option value="MT">Mato Grosso</option>
+    <option value="MS">Mato Grosso do Sul</option>
+    <option value="MG">Minas Gerais</option>
+    <option value="PA">Pará</option>
+    <option value="PB">Paraíba</option>
+    <option value="PR">Paraná</option>
+    <option value="PE">Pernambuco</option>
+    <option value="PI">Piauí</option>
+    <option value="RJ">Rio de Janeiro</option>
+    <option value="RN">Rio Grande do Norte</option>
+    <option value="RS">Rio Grande do Sul</option>
+    <option value="RO">Rondônia</option>
+    <option value="RR">Roraima</option>
+    <option value="SC">Santa Catarina</option>
+    <option value="SP">São Paulo</option>
+    <option value="SE">Sergipe</option>
+    <option value="TO">Tocantins</option>
+  </select>
+</div>
+
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input type="text" id="city" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Data de Nascimento</label>
+                    <div class="datepicker-container">
+                        <input type="text" id="birthDate" class="form-control" placeholder="DD/MM/AAAA" required>
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="plan">Plano de Interesse</label>
+                    <select id="plan" class="form-control" required>
+                        <option value="">Selecione...</option>
+                        <option value="completo">Completo (12x de R$19,70)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Finalizar Inscrição</button>
+            </form>
+        </div>
+
+
+        <!-- Tela de pagamento (inicialmente escondida) -->
+<div id="paymentInfo" style="display:none; margin-top:20px; text-align:center;">
+  <h3>Inscrição realizada com sucesso! ✅</h3>
+  <p>Finalize seu pagamento via <b>PIX</b>:</p>
+  <p><strong>Chave PIX:</strong> seuemail@pix.com</p>
+  <p>Ou copie e cole: <strong>123.456.789-00</strong></p>
+  <p>Após o pagamento, envie o comprovante para nosso WhatsApp:</p>
+  <a href="https://wa.me/5581999999999" target="_blank" class="btn btn-success">
+    📲 Enviar comprovante no WhatsApp
+  </a>
+  
+</div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Robson Ladeira</h3>
+                    <p>O curso mais completo de Excel do básico ao avançado, com foco em análise estratégica e resolução de problemas reais.</p>
+                    <div class="social-links">
+    <a href="https://www.instagram.com/robsonladeira.agv/" 
+       class="instagram" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://wa.me/5581974009923" 
+       class="whatsapp" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#contact">Inscrição</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>Robson Ladeira
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> Robsonladeira11_@hotmail.com</li>
+                        <li><i class="fas fa-phone"></i> (81) 9 7400-9923</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Robson Ladeira. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+<div class="floating-btns">
+    <a href="https://wa.me/5581974009923" 
+       class="floating-btn whatsapp" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.instagram.com/robsonladeira.agv/" 
+       class="floating-btn instagram" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+</div>
+
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Accordion for modules
+        const moduleHeaders = document.querySelectorAll('.module-header');
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const module = header.parentElement;
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                if (content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    // Close all other open modules
+                    document.querySelectorAll('.module-content.active').forEach(activeContent => {
+                        activeContent.classList.remove('active');
+                        activeContent.previousElementSibling.querySelector('i').classList.remove('fa-chevron-up');
+                        activeContent.previousElementSibling.querySelector('i').classList.add('fa-chevron-down');
+                    });
+                    
+                    content.classList.add('active');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // Testimonial slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+        
+        // Auto slide change
+        setInterval(() => {
+            let nextSlide = (currentSlide + 1) % testimonials.length;
+            showSlide(nextSlide);
+        }, 5000);
+        
+        // Datepicker initialization
+        const birthDateInput = document.getElementById('birthDate');
+        const calendarIcon = document.querySelector('.datepicker-container i');
+        
+        calendarIcon.addEventListener('click', () => {
+            birthDateInput.focus();
+        });
+        
+        // Simple date masking
+        birthDateInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '/' + value.substring(5, 9);
+            }
+            
+            e.target.value = value;
+        });
+        
+        // Form submission (enviando para o servidor Python/SQLite)
+const enrollmentForm = document.getElementById('enrollmentForm');
+
+enrollmentForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    fullName: document.getElementById('fullName').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    source: document.getElementById('source').value,
+    state: document.getElementById('state').value,
+    city: document.getElementById('city').value,
+    birthDate: document.getElementById('birthDate').value,
+    plan: document.getElementById('plan').value,
+  };
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/inscrever", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+  if (response.ok) {
+  // Esconde o formulário
+  enrollmentForm.style.display = "none";
+
+  // Mostra as informações de pagamento
+  document.getElementById("paymentInfo").style.display = "block";
+
+  // Faz a página rolar até a div de pagamento
+document.getElementById("paymentInfo").scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
+
+
+  enrollmentForm.reset();
+} else {
+  alert("Erro no servidor. ❌");
+}
+
+  } catch (error) {
+    alert("Erro ao conectar com o servidor.");
+    console.error(error);
+  }
+});
+
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+    
+</body>
+</html>
